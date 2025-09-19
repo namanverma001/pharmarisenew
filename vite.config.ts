@@ -13,15 +13,25 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
   },
   build: {
-    target: 'esnext',
+    target: 'es2015',
     outDir: 'dist',
     sourcemap: false,
+    minify: true,
     rollupOptions: {
+      input: path.resolve(__dirname, 'index.html'),
       output: {
-        manualChunks: undefined,
-      }
+        format: 'es',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+      },
     },
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
+    force: true
+  }
 });
