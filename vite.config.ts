@@ -16,17 +16,13 @@ export default defineConfig({
     extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
   },
   build: {
-    target: 'es2015',
+    target: 'esnext',
     outDir: 'dist',
     sourcemap: false,
-    minify: true,
+    minify: 'esbuild',
     rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
       output: {
-        format: 'es',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        manualChunks: undefined,
       },
     },
   },
